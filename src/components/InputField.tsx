@@ -4,11 +4,12 @@ import "./styles.css";
 interface Props {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>; //Copy from App.tsx by hovering on setTodo
+  handleAdd: (e: React.FormEvent) => void;
 }
 
-const InputField = ({ todo, setTodo }: Props) => {
+const InputField = ({ todo, setTodo, handleAdd }: Props) => {
   return (
-    <form className="input">
+    <form className="input" onSubmit={handleAdd}>
       <input
         type="input"
         value={todo}
