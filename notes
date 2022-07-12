@@ -1,0 +1,79 @@
+//Official Docs: https://www.typescriptlang.org/docs/handbook/intro.html
+
+let nameStr: string; //only string
+let tsUnion: string | number; //String and number
+let anyStrType: any; //any
+let unknownStrType: unknown; //recommended rather than using any
+
+let age: number;
+let isSelected: boolean;
+let srtingArray: string[];
+let numberArray: number[];
+
+// Tuple
+let role: [number, string];
+role = [5, "string"];
+
+//Function declaration
+let printNameUsingFn: Function; // 1st method
+
+let printNameVoid: (name: string) => void; // If func is not returning anything | Void returns undefined
+let printNameNever: (name: string) => never; // If func is not returning anything | Never doesnt returns anything
+let printNameReturn: (age: number) => number; // If func is returning anything
+
+//---------------------------Objects using type-------------------------------
+type Person = {
+  name: string;
+  age?: number; // ? Represents optional value
+};
+
+let personObject: Person = {
+  name: "Name",
+  age: 100,
+};
+
+let arrayOfObjects: Person[];
+
+//We can extend the type of an object
+type X = {
+  a: string;
+  b: number;
+};
+
+type Y = X & {
+  c: boolean;
+  d: string;
+};
+
+let printWithError: Y = {
+  c: true,
+  d: "string",
+}; //It will give an error that a and b type is missing
+
+let printWithoutError: Y = {
+  a: "str",
+  b: 100,
+  c: true,
+  d: "string",
+}; //It will not give an error
+
+//------------------------------------Aliases: Types and Interfaces----------------------------------
+interface PersonInterface {
+  name: string;
+  age: number;
+}
+
+//Extending interface
+interface personData extends PersonInterface {
+  profession: string;
+}
+
+//We can include type in a interface
+interface typeInInterface extends X {
+  name: string;
+}
+
+//We can include interface in a type
+type interfaceInType = PersonInterface & {
+  name: string;
+};
