@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./styles.css";
 
 interface Props {
@@ -8,9 +8,19 @@ interface Props {
 }
 
 const InputField = ({ todo, setTodo, handleAdd }: Props) => {
+  //Disable shadow when pressed enter using ref
+  const inputRef = useRef<HTMLInputElement>(null); //Hover on tag here on input and copy type from there
+
   return (
-    <form className="input" onSubmit={handleAdd}>
+    <form
+      className="input"
+      onSubmit={(e) => {
+        handleAdd(e);
+        inputRef.current?.blur();
+      }}
+    >
       <input
+        ref={inputRef}
         type="input"
         value={todo}
         onChange={(e) => setTodo(e.target.value)}
